@@ -17,7 +17,7 @@ class MEMMANAGER {
 	 * check the memcache module is loaded
 	 */
 	function LoadMem() {
-		if (!extension_loaded('memcache')) {
+		if (!extension_loaded('memcache') && !extension_loaded('memcached')) {
 			exit("Fail : no memcache support");
 		} 
 	} 
@@ -83,7 +83,12 @@ class MEMMANAGER {
 	 * @return boolean 
 	 */
 	function MemConnect($type, $curcon) {
-		$this -> memcache_obj = new Memcache;
+        try{
+            $this -> memcache_obj = new Memcache;
+        }catch (Exception $e){
+            $this -> memcache_obj = new Memcached;
+        }
+
 		if ($type == 'con') {
 			if ($curcon['ispcon'] == 0) {
 				if ($curcon['timeout'] == 1) {
