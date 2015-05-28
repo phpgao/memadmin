@@ -92,18 +92,18 @@ class MEMMANAGER {
 		if ($type == 'con') {
 			if ($curcon['ispcon'] == 0) {
 				if ($curcon['timeout'] == 1) {
-					if (!@$this -> memcache_obj -> connect($curcon['host'], $curcon['port']))
+					if (!@$this -> memcache_obj -> addServer($curcon['host'], $curcon['port']))
 						return false;
 				} else {
-					if (!@$this -> memcache_obj -> connect($curcon['host'], $curcon['port'], $curcon['timeout']))
+					if (!@$this -> memcache_obj -> addServer($curcon['host'], $curcon['port'], $curcon['timeout']))
 						return false;
 				} 
 			} else {
 				if ($curcon['timeout'] == 1) {
-					if (!@$this -> memcache_obj -> pconnect($curcon['host'], $curcon['port']))
+					if (!@$this -> memcache_obj -> addServer($curcon['host'], $curcon['port']))
 						return false;
 				} else {
-					if (!@$this -> memcache_obj -> pconnect($curcon['host'], $curcon['port'], $curcon['timeout']))
+					if (!@$this -> memcache_obj -> addServer($curcon['host'], $curcon['port'], $curcon['timeout']))
 						return false;
 				} 
 			} 
